@@ -45,7 +45,6 @@ export function ThirdPersonCamera({
       const dz = eventPosition[2] - position.z;
       const angleToEvent = Math.atan2(dx, dz);
 
-      // Camera behind the character (opposite side from event)
       idealPos.current.set(
         position.x - Math.sin(angleToEvent) * DIALOGUE_DISTANCE,
         position.y + DIALOGUE_HEIGHT,

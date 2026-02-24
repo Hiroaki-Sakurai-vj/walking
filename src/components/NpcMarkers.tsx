@@ -6,6 +6,9 @@ import {
   CONVERSATION_POINTS,
   checkConversationProximity,
 } from "../utils/conversations";
+import { RobotNpc } from "./RobotNpc";
+
+const ROBOT_CONVERSATION_ID = "robot-west";
 
 function HologramMarker({
   position,
@@ -146,9 +149,13 @@ export function NpcMarkers({
 }) {
   return (
     <>
-      {CONVERSATION_POINTS.map((cp) => (
-        <HologramMarker key={cp.id} position={cp.position} color={cp.color} />
-      ))}
+      {CONVERSATION_POINTS.map((cp) =>
+        cp.id === ROBOT_CONVERSATION_ID ? (
+          <RobotNpc key={cp.id} position={cp.position} color={cp.color} targetRef={targetRef} />
+        ) : (
+          <HologramMarker key={cp.id} position={cp.position} color={cp.color} />
+        )
+      )}
       <ProximityChecker
         targetRef={targetRef}
         dialogueActive={dialogueActive}

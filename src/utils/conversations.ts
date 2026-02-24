@@ -153,6 +153,50 @@ export const CONVERSATION_POINTS: ConversationPoint[] = [
       ],
     },
   },
+  {
+    id: "robot-west",
+    position: [-30, 0, 0],
+    triggerRadius: 6,
+    color: "#8040ff",
+    dialogue: {
+      bichon: [
+        { speaker: "ロボ R-77", text: "ピピッ！もふもふ生命体を検知！かわいさレベル…計測不能！オーバーフロー！やばい！" },
+        { speaker: "ロボ R-77", text: "ねえねえ、しっぽの回転数すごいね！毎分何回転？私のプロペラより速いかも！" },
+        {
+          speaker: "ロボ R-77",
+          text: "ところでお願いがあるんだけど…なでさせてくれない？",
+          choices: [
+            {
+              label: "いいよ！なでなで！",
+              response: { speaker: "ロボ R-77", text: "わーーー！！もっふもふ！！センサー全部幸せで埋まった！今日は記念日にする！「もふもふ記念日」！" },
+            },
+            {
+              label: "おやつくれたらね",
+              response: { speaker: "ロボ R-77", text: "おやつ！？待って、腕のコンパートメントに…ボルトしかない！今度絶対おやつ持ってくるから予約させて！" },
+            },
+          ],
+        },
+      ],
+      sentinel: [
+        { speaker: "ロボ R-77", text: "おおっ！超カッコいいの来た！スキャン中…装備ピカピカ！鎧のツヤ、私のボディより上！メンテの秘訣教えて！" },
+        { speaker: "ロボ R-77", text: "私はR-77！この街の元気担当ロボ！毎日ここで通行人にハイタッチしてるの。今日は3人目だよ、きみ！" },
+        {
+          speaker: "ロボ R-77",
+          text: "ハイタッチしよ！どっちの手がいい？",
+          choices: [
+            {
+              label: "右手！",
+              response: { speaker: "ロボ R-77", text: "パァン！！いい音！！今日イチのハイタッチ！きみの手あったかいね。私のは金属だから冷たくてごめんね、えへへ。" },
+            },
+            {
+              label: "両手でしよう",
+              response: { speaker: "ロボ R-77", text: "ダブル！？贅沢！パパァン！！最高記録更新！きみ天才だよ！また来てね、待ってるから！" },
+            },
+          ],
+        },
+      ],
+    },
+  },
 ];
 
 export function checkConversationProximity(

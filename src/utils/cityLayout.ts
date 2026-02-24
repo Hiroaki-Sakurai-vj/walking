@@ -87,9 +87,19 @@ const city = generateCity(rand);
 export const BUILDINGS = city.buildings;
 export const LAMPS = city.lamps;
 
+/** Simple circular obstacles (e.g. NPCs) */
+interface CircleObstacle {
+  x: number;
+  z: number;
+  radius: number;
+}
+
+const CIRCLE_OBSTACLES: CircleObstacle[] = [
+  { x: -30, z: 0, radius: 3 }, // Robot NPC
+];
+
 /**
- * Check if a circle at (x, z) with given radius overlaps any building.
- * Returns the push-out vector, or null if no collision.
+ * Check if a circle at (x, z) with given radius overlaps any building or obstacle.
  */
 export function checkBuildingCollision(
   x: number,
@@ -112,7 +122,6 @@ export function checkBuildingCollision(
     const overlapZ = z + radius > minZ && z - radius < maxZ;
 
     if (overlapX && overlapZ) {
-      // Find which axis has less penetration to determine slide direction
       const penLeft = x + radius - minX;
       const penRight = maxX - (x - radius);
       const penTop = z + radius - minZ;
@@ -121,6 +130,20 @@ export function checkBuildingCollision(
       const minPenZ = Math.min(penTop, penBottom);
 
       if (minPenX < minPenZ) {
+        blockedX = true;
+      } else {
+        blockedZ = true;
+      }
+    }
+  }
+
+  // Circle-vs-circle collision for NPC obstacles
+  for (const ob of CIRCLE_OBSTACLES) {
+    const dx = x - ob.x;
+    const dz = z - ob.z;
+    const minDist = radius + ob.radius;
+    if (dx * dx + dz * dz < minDist * minDist) {
+      if (Math.abs(dx) > Math.abs(dz)) {
         blockedX = true;
       } else {
         blockedZ = true;
